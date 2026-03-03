@@ -25,3 +25,8 @@ export const useAuthStore = create<AuthState>()(
     { name: "adlayer-auth" }
   )
 );
+
+/** Returns true when logged in with the demo account (no backend required) */
+export function isDemoMode(): boolean {
+  return useAuthStore.getState().token === "demo-token-adlayer-2025";
+}

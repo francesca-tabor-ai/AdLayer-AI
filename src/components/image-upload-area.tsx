@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useState, type DragEvent } from "react";
-import { Upload } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Upload, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useUploadImage } from "@/hooks/use-images";
 import { Spinner } from "@/components/ui/spinner";
@@ -9,7 +10,9 @@ import { toast } from "@/components/ui/toast";
 
 export function ImageUploadArea() {
   const [dragOver, setDragOver] = useState(false);
+  const [uploadedId, setUploadedId] = useState<string | null>(null);
   const upload = useUploadImage();
+  const router = useRouter();
 
   const handleFile = useCallback(
     (file: File) => {
@@ -20,6 +23,7 @@ export function ImageUploadArea() {
       }
       upload.mutate(file, {
         onSuccess: (data) => {
+          setUploadedId(data.image_id);
           toast(`Image uploaded! ID: ${data.image_id}`, "success");
         },
         onError: () => {
@@ -39,6 +43,39 @@ export function ImageUploadArea() {
     },
     [handleFile]
   );
+
+  // Show success state with link to analysis
+  if (uploadedId) {
+    return (
+      <div className="border-2 border-emerald-200 bg-emerald-50/50 rounded-xl p-12 text-center">
+        <div className="flex flex-col items-center gap-3">
+          <CheckCircle className="h-10 w-10 text-emerald-500" />
+          <div>
+            <p className="text-sm font-medium text-gray-700">
+              Upload successful!
+            </p>
+            <p className="text-xs text-gray-500 mt-1 font-mono">
+              {uploadedId}
+            </p>
+          </div>
+          <div className="flex gap-3 mt-2">
+            <button
+              onClick={() => router.push(`/analysis/${uploadedId}`)}
+              className="text-sm font-medium text-accent-purple hover:text-accent-purple/80 underline underline-offset-2 transition-colors"
+            >
+              View Analysis
+            </button>
+            <button
+              onClick={() => setUploadedId(null)}
+              className="text-sm font-medium text-slate-500 hover:text-slate-700 underline underline-offset-2 transition-colors"
+            >
+              Upload Another
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
