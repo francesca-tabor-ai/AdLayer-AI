@@ -24,6 +24,11 @@ export default function LoginPage() {
     );
   };
 
+  const fillDemo = () => {
+    setEmail("demo@adlayer.ai");
+    setPassword("demo2025");
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-sm">
@@ -62,6 +67,27 @@ export default function LoginPage() {
             {login.isPending ? <Spinner size="sm" className="text-white" /> : "Sign In"}
           </Button>
         </form>
+
+        {/* Demo credentials hint */}
+        <div className="mt-6 p-3 rounded-xl bg-accent-purple/5 border border-accent-purple/10">
+          <p className="text-xs text-slate-500 text-center mb-1.5">
+            <span className="font-semibold text-accent-purple">Demo Account</span>
+          </p>
+          <div className="flex items-center justify-center gap-3 text-xs font-mono text-slate-600">
+            <span>demo@adlayer.ai</span>
+            <span className="text-slate-300">/</span>
+            <span>demo2025</span>
+          </div>
+          <div className="flex justify-center mt-2">
+            <button
+              type="button"
+              onClick={fillDemo}
+              className="text-[11px] font-medium text-accent-purple hover:text-accent-purple/80 transition-colors underline underline-offset-2"
+            >
+              Auto-fill demo credentials
+            </button>
+          </div>
+        </div>
 
         <p className="text-sm text-gray-500 text-center mt-6">
           Don&apos;t have an account?{" "}
