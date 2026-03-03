@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { ExternalLink, ImageIcon } from "lucide-react";
 import type { ScrapedImageItem } from "@/lib/mock-data";
 
 const typeColors: Record<string, string> = {
@@ -14,6 +15,7 @@ const typeColors: Record<string, string> = {
 
 function ImageCard({ item }: { item: ScrapedImageItem }) {
   const [showDetails, setShowDetails] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   return (
     <div
@@ -21,14 +23,27 @@ function ImageCard({ item }: { item: ScrapedImageItem }) {
       onMouseEnter={() => setShowDetails(true)}
       onMouseLeave={() => setShowDetails(false)}
     >
-      <div className="aspect-[4/3] bg-slate-50 flex items-center justify-center overflow-hidden">
-        <div className="text-xs text-slate-300 font-mono text-center p-4">
-          {item.width && item.height
-            ? `${item.width} x ${item.height}`
-            : item.format.toUpperCase()}
-          <br />
-          {(item.file_size_bytes / 1024).toFixed(0)} KB
-        </div>
+      <div className="aspect-[4/3] bg-slate-50 flex items-center justify-center overflow-hidden relative">
+        {!imgError ? (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={item.image_url}
+            alt={item.alt_text || "Scraped image"}
+            className="w-full h-full object-contain"
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <div className="flex flex-col items-center gap-1.5 text-slate-300">
+            <ImageIcon className="h-8 w-8" />
+            <div className="text-xs font-mono text-center px-4">
+              {item.width && item.height
+                ? `${item.width} x ${item.height}`
+                : item.format.toUpperCase()}
+              <br />
+              {(item.file_size_bytes / 1024).toFixed(0)} KB
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="p-3">
@@ -50,13 +65,42 @@ function ImageCard({ item }: { item: ScrapedImageItem }) {
         )}
       </div>
 
+      {/* Hover overlay with details + external links */}
       {showDetails && (
-        <div className="absolute inset-0 bg-ink/80 backdrop-blur-sm p-4 flex flex-col justify-end transition-opacity">
+        <div className="absolute inset-0 bg-ink/85 backdrop-blur-sm p-4 flex flex-col justify-between transition-opacity">
+          <div className="flex justify-end gap-1.5">
+            <a
+              href={item.image_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+              title="Open image"
+            >
+              <ImageIcon className="h-3.5 w-3.5 text-white" />
+            </a>
+            <a
+              href={item.page_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+              title="Open source page"
+            >
+              <ExternalLink className="h-3.5 w-3.5 text-white" />
+            </a>
+          </div>
           <div className="text-white space-y-1.5">
             <p className="text-xs font-medium">{item.alt_text}</p>
-            <p className="text-[10px] text-white/60 font-mono truncate">
+            <a
+              href={item.page_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="block text-[10px] text-white/60 font-mono truncate hover:text-white/90 transition-colors"
+            >
               {item.page_url}
-            </p>
+            </a>
             <p className="text-[10px] text-white/60 font-mono truncate">
               {item.content_hash.slice(0, 16)}...
             </p>

@@ -15,15 +15,33 @@ import {
   Globe,
   Clock,
   CheckCircle,
+  ExternalLink,
 } from "lucide-react";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { useState, useMemo } from "react";
 
 export default function ScrapeJobDetailPage() {
   const params = useParams();
   const jobId = params.jobId as string;
   const { data: manifest, isLoading } = useScrapeJob(jobId);
   const [showManifest, setShowManifest] = useState(false);
+
+  // Derive the source URL from the first item's page_url
+  const sourceUrl = useMemo(() => {
+    if (!manifest?.items?.length) return null;
+    try {
+      const url = new URL(manifest.items[0].page_url);
+      return url.origin + url.pathname;
+    } catch {
+      return manifest.items[0].page_url;
+    }
+  }, [manifest]);
+
+  // Derive unique source pages
+  const sourcePages = useMemo(() => {
+    if (!manifest?.items?.length) return [];
+    const pages = new Set(manifest.items.map((item) => item.page_url));
+    return Array.from(pages);
+  }, [manifest]);
 
   if (isLoading) {
     return (
@@ -55,6 +73,7 @@ export default function ScrapeJobDetailPage() {
   return (
     <AppLayout>
       <div className="space-y-8">
+        {/* Header */}
         <div>
           <Link
             href="/scrapers"
@@ -69,6 +88,18 @@ export default function ScrapeJobDetailPage() {
               <p className="text-sm text-slate-500 mt-1 font-mono">
                 {manifest.regions.join(", ")} / {manifest.job_id.slice(0, 8)}
               </p>
+              {sourceUrl && (
+                <a
+                  href={sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-xs text-accent-purple hover:text-accent-purple/80 transition-colors mt-1.5"
+                >
+                  <Globe className="h-3 w-3" />
+                  {new URL(sourceUrl).hostname}
+                  <ExternalLink className="h-2.5 w-2.5" />
+                </a>
+              )}
             </div>
             <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-100 text-emerald-700">
               <CheckCircle className="h-3 w-3" />
@@ -77,6 +108,7 @@ export default function ScrapeJobDetailPage() {
           </div>
         </div>
 
+        {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {stats.map((stat) => (
             <div
@@ -92,6 +124,30 @@ export default function ScrapeJobDetailPage() {
           ))}
         </div>
 
+        {/* Source pages */}
+        {sourcePages.length > 0 && (
+          <div className="bg-white rounded-2xl border border-slate-100 shadow-soft p-5">
+            <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
+              Source Pages
+            </h3>
+            <div className="space-y-1.5">
+              {sourcePages.map((pageUrl) => (
+                <a
+                  key={pageUrl}
+                  href={pageUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs text-slate-600 hover:text-accent-purple transition-colors font-mono group"
+                >
+                  <ExternalLink className="h-3 w-3 text-slate-300 group-hover:text-accent-purple shrink-0" />
+                  <span className="truncate">{pageUrl}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* View toggle */}
         <div className="flex items-center gap-3">
           <Button
             variant={showManifest ? "secondary" : "primary"}
