@@ -1,0 +1,877 @@
+Platform Name
+AdLayer AI
+Executive Summary
+Vision
+
+AdLayer AI is a Creative Intelligence Platform that transforms static advertisements into structured, reusable, and automation-ready data models.
+
+By uploading a single advert image (JPG, PNG, PDF, or screenshot), AdLayer AI automatically:
+
+Deconstructs the creative into logical layers
+
+Extracts all textual and visual elements
+
+Reconstructs the advert’s information architecture
+
+Classifies components (headline, CTA, offer, brand, legal, etc.)
+
+Maps everything into a structured schema
+
+Generates a downloadable, production-ready CSV for automation workflows
+
+AdLayer AI bridges the gap between creative design and structured marketing data.
+
+The Problem
+
+Marketing teams create thousands of ads across:
+
+Paid social
+
+Display
+
+E-commerce
+
+Print
+
+Email
+
+Retail signage
+
+But creatives are typically:
+
+Locked inside flat images
+
+Not structured
+
+Not reusable
+
+Not automation-ready
+
+Not analyzable at scale
+
+There is no standard way to extract:
+
+Messaging hierarchy
+
+CTA positioning
+
+Offer structure
+
+Brand placement
+
+Visual density
+
+Layout architecture
+
+As a result:
+
+Scaling creative production is slow
+
+Reverse-engineering competitor ads is manual
+
+Design systems are inconsistently applied
+
+Data Merge and automation workflows require manual setup
+
+The Solution
+
+AdLayer AI converts visual creatives into structured intelligence.
+
+Core Workflow
+
+Upload an advert image
+
+AI reconstructs:
+
+Visual layers
+
+Text blocks
+
+Semantic roles
+
+Layout hierarchy
+
+Platform builds:
+
+Information architecture model
+
+Editable field table
+
+Structured CSV (Data Merge ready)
+
+Export:
+
+CSV
+
+JSON
+
+Cropped assets
+
+Layout metadata
+
+What Makes It Different
+
+AdLayer AI is not just OCR.
+
+It performs:
+
+1. Visual Layer Reconstruction
+
+Text regions
+
+CTA buttons
+
+Logos
+
+Product imagery
+
+Background blocks
+
+Badges
+
+Legal microcopy
+
+Color systems
+
+2. Semantic Classification
+
+Headline
+
+Subheadline
+
+Value proposition
+
+Offer
+
+Discount
+
+CTA
+
+Disclaimer
+
+Brand block
+
+3. Information Architecture Modeling
+
+The system groups detected elements into logical marketing blocks:
+
+Brand Layer
+
+Value Layer
+
+Offer Layer
+
+Conversion Layer
+
+Compliance Layer
+
+This transforms a flat image into a content system.
+
+Output Capabilities
+
+AdLayer AI generates:
+
+Structured Table View
+
+Field Name
+
+Value
+
+Confidence Score
+
+Bounding Box Coordinates
+
+Source Element ID
+
+Automation-Ready CSV
+
+Supports:
+
+Data Merge in layout tools
+
+Ad variant generation
+
+Catalog automation
+
+Batch creative production
+
+Structured JSON API
+
+For integration into:
+
+DAM systems
+
+Creative automation platforms
+
+Marketing analytics tools
+
+Target Customers
+1. Marketing Teams
+
+Rapidly rebuild winning ads into templates
+
+Scale variants across markets
+
+Extract structure from legacy creatives
+
+2. Creative Agencies
+
+Reverse-engineer competitor ads
+
+Convert mockups into structured production files
+
+Audit layout systems
+
+3. E-commerce Brands
+
+Convert promotional ads into structured product feeds
+
+Generate localized versions automatically
+
+4. Automation & Publishing Teams
+
+Feed structured outputs into layout automation pipelines
+
+Enable print-ready workflows via tools like Adobe InDesign
+
+Product Modules
+1. Creative Deconstruction Engine
+
+Computer vision + layout inference.
+
+2. Semantic Mapping Engine
+
+Transforms raw detections into marketing meaning.
+
+3. Information Architecture Builder
+
+Groups elements into reusable content blocks.
+
+4. Data Export Engine
+
+Generates:
+
+CSV
+
+JSON
+
+Asset package
+
+Automation-compatible schema
+
+5. Creative Intelligence Dashboard
+
+Analytics on:
+
+CTA placement frequency
+
+Headline length patterns
+
+Offer positioning
+
+Visual density scoring
+
+Layout similarity clustering
+
+Long-Term Vision
+
+AdLayer AI evolves into:
+
+A Creative Operating System
+
+A Creative Intelligence Database
+
+A Competitive Creative Index
+
+A Foundation layer for automated ad generation
+
+Eventually enabling:
+
+Auto-template reconstruction
+
+Auto-variant generation
+
+Multi-format creative scaling
+
+Campaign-level messaging analysis
+
+Strategic Positioning
+
+AdLayer AI sits at the intersection of:
+
+Computer Vision
+
+Marketing Automation
+
+Creative Operations
+
+Design Systems
+
+Advertising Intelligence
+
+It converts visual advertising from static output into structured, queryable, reusable data.
+
+Monetization Strategy
+SaaS Tiered Model
+
+Starter
+
+Manual upload
+
+CSV export
+
+Limited monthly credits
+
+Pro
+
+Batch uploads
+
+API access
+
+Automation exports
+
+Asset packaging
+
+Enterprise
+
+Custom schema mapping
+
+Brand rule engines
+
+Workflow integration
+
+Dedicated model tuning
+
+Why Now?
+
+Explosion of creative volume in paid media
+
+Rise of creative-as-a-performance-driver
+
+Growing need for structured automation
+
+Increased adoption of AI in creative workflows
+
+Marketing teams don’t need more images.
+
+They need structure.
+
+AdLayer AI makes every advert machine-readable.
+
+If you'd like, I can now:
+
+Design the product roadmap (12–24 months)
+
+Create the internal multi-agent AI architecture
+
+Draft investor pitch slides
+
+Define the technical system stack
+
+Or build the CSV schema specification in production detail
+
+Create a product roadmap and itemised, detailed features
+AdLayer AI — Product Roadmap & Detailed Feature Breakdown
+
+AdLayer AI transforms flat adverts into structured, automation-ready creative systems. Below is a staged roadmap designed to move from accurate deconstruction → structured intelligence → automation platform → creative infrastructure layer.
+
+🗺 Product Roadmap Overview (24 Months)
+Phase	Timeline	Focus	Outcome
+Phase 1	0–6 Months	Core Deconstruction Engine	Reliable structured extraction + CSV export
+Phase 2	6–12 Months	Creative Intelligence Layer	Semantic modeling + analytics + automation outputs
+Phase 3	12–18 Months	Workflow & Integration Platform	API, batch processing, publishing integrations
+Phase 4	18–24 Months	Creative Operating System	Template reconstruction + variant generation
+🚀 Phase 1 (0–6 Months)
+Foundation: Creative Deconstruction Engine (MVP → V1)
+1️⃣ Image Ingestion & Processing
+
+Features
+
+Upload formats: JPG, PNG, WebP, PDF
+
+Batch upload (up to X images per job)
+
+Auto normalization (resolution, color profile, orientation)
+
+Metadata extraction (dimensions, aspect ratio)
+
+Versioning (original vs processed)
+
+Advanced Capabilities
+
+Auto-detect format type (social, display, print)
+
+Multi-size detection (carousel vs single image)
+
+Pre-processing pipeline (denoise, contrast normalization for OCR)
+
+2️⃣ Layout & Region Detection Engine
+
+Detects:
+
+Text regions
+
+Image regions
+
+Logos
+
+CTA buttons
+
+Badges/stickers
+
+Background panels
+
+Decorative shapes
+
+Product images
+
+Outputs per region:
+
+Bounding box (x, y, width, height normalized)
+
+Confidence score
+
+Visual category
+
+Z-order estimation
+
+Dominant color
+
+3️⃣ OCR & Text Structuring
+
+Capabilities
+
+Multi-language OCR
+
+Line merging
+
+Paragraph reconstruction
+
+Font size estimation (relative)
+
+Alignment detection (left/center/right)
+
+Uppercase detection
+
+Price pattern detection (£$€)
+
+Semantic inference v1 (rule-based):
+
+Largest text block = Headline candidate
+
+High-contrast button-shaped region = CTA
+
+Small dense bottom text = Disclaimer
+
+Currency symbol detection = Price
+
+4️⃣ Semantic Classification Engine (v1)
+
+Auto-labels detected elements as:
+
+Brand
+
+Headline
+
+Subheadline
+
+Body copy
+
+Offer
+
+Price
+
+Discount
+
+CTA label
+
+CTA URL (if visible)
+
+Legal
+
+Badge
+
+Icon
+
+User can override classifications.
+
+5️⃣ Information Architecture Builder
+
+Groups elements into structured blocks:
+
+Brand Block
+
+Value Proposition Block
+
+Offer Block
+
+Conversion Block
+
+Compliance Block
+
+Features
+
+Visual block grouping (based on proximity)
+
+Hierarchy scoring
+
+Editable IA tree view
+
+6️⃣ Structured Data Table View
+
+UI shows:
+
+Field	Value	Confidence	Source Region	Coordinates	Editable
+
+Capabilities:
+
+Inline editing
+
+Reassign semantic role
+
+Merge/split text blocks
+
+Manual crop override for images
+
+Validation warnings
+
+7️⃣ CSV Export Engine (Data-Merge Ready)
+
+Supports:
+
+Customizable header templates
+
+@Image field formatting
+
+Absolute path generation
+
+UTF-8 and UTF-16 encoding
+
+Windows/Mac path formats
+
+One-row-per-ad
+
+Multi-row export (variants)
+
+Also generates:
+
+Asset folder (cropped hero, logo, etc.)
+
+8️⃣ JSON API Export
+
+Structured schema:
+
+Creative metadata
+
+Element list
+
+Block structure
+
+Field map
+
+Layout metadata
+
+📊 Phase 2 (6–12 Months)
+Creative Intelligence Layer
+1️⃣ Advanced Semantic Modeling (ML-based)
+
+Improved classification accuracy using:
+
+Transformer-based layout understanding
+
+Multi-modal AI (vision + text)
+
+Pattern recognition for CTA styles
+
+Brand consistency modeling
+
+New fields:
+
+Tone classification (urgent, luxury, discount-driven)
+
+Visual density score
+
+CTA aggressiveness score
+
+Emotional intensity score
+
+2️⃣ Creative Similarity Engine
+
+Compare ads visually
+
+Layout similarity clustering
+
+Messaging similarity detection
+
+Competitor ad comparison
+
+Brand style consistency scoring
+
+3️⃣ Design System Detection
+
+Automatically detects:
+
+Primary font styles
+
+Spacing rhythm
+
+Grid structure
+
+Button shape archetype
+
+Border radius detection
+
+Color palette extraction (HEX + % dominance)
+
+Exports brand token suggestions.
+
+4️⃣ Multi-Format Mapping
+
+Maps a single creative into:
+
+Social formats (1:1, 9:16, 16:9)
+
+Print formats (A4, Letter)
+
+Display banner sizes
+
+Outputs:
+
+Layout transformation suggestions
+
+Auto-reflowed content structures
+
+5️⃣ Bulk Processing
+
+Upload folders
+
+Auto-label campaigns
+
+Batch CSV export
+
+Performance-optimized inference
+
+Queue management
+
+🔌 Phase 3 (12–18 Months)
+Workflow & Automation Platform
+1️⃣ API Platform
+
+REST + Webhook system
+
+Endpoints:
+
+/analyze
+
+/get-creative
+
+/export-csv
+
+/export-json
+
+/get-layout-metadata
+
+Supports:
+
+Async processing
+
+Status callbacks
+
+Batch job tracking
+
+2️⃣ DAM & Publishing Integrations
+
+Integrations with:
+
+Adobe InDesign
+
+Adobe InDesign Server
+
+Figma
+
+CMS systems
+
+E-commerce platforms
+
+Features:
+
+Direct template population
+
+Data Merge ready packaging
+
+IDML generation
+
+Template reconstruction preview
+
+3️⃣ Creative Audit Mode
+
+Allows brands to:
+
+Analyze 1,000+ ads
+
+Detect inconsistent CTA usage
+
+Identify layout drift
+
+Flag brand color violations
+
+Track messaging patterns over time
+
+4️⃣ Collaboration Layer
+
+Role-based access
+
+Commenting on regions
+
+Approval workflows
+
+Change tracking
+
+Version comparison
+
+🧠 Phase 4 (18–24 Months)
+Creative Operating System
+1️⃣ Auto-Template Reconstruction
+
+System builds:
+
+Editable grid suggestions
+
+Suggested layout guides
+
+Reconstructable design template
+
+Layer export for design tools
+
+2️⃣ Variant Generation Engine
+
+Using structured IA:
+
+Auto-generate headline variants
+
+Swap CTA placements
+
+Test offer messaging structures
+
+Create localized versions
+
+Produce multi-market exports
+
+3️⃣ Creative Performance Layer (Optional Add-On)
+
+Integrate:
+
+Paid media metrics
+
+Conversion data
+
+A/B testing results
+
+Correlate:
+
+Layout structure vs performance
+
+CTA placement vs CTR
+
+Headline length vs CVR
+
+4️⃣ Creative Intelligence Database
+
+Searchable database:
+
+By layout type
+
+By CTA format
+
+By price display structure
+
+By design archetype
+
+By brand
+
+Enables:
+
+Reverse-engineering competitors
+
+Finding top-performing structures
+
+Training internal design teams
+
+🧩 Detailed Feature Inventory
+Core Engine
+
+Layout detection
+
+OCR
+
+Semantic mapping
+
+Block grouping
+
+Confidence scoring
+
+Field validation
+
+Multi-language support
+
+Export System
+
+CSV
+
+JSON
+
+Asset pack
+
+Data Merge format
+
+Custom schema mapping
+
+Intelligence Layer
+
+Similarity scoring
+
+Brand rule detection
+
+Layout archetyping
+
+Creative clustering
+
+Emotional tone detection
+
+Automation Layer
+
+API access
+
+Batch jobs
+
+Webhooks
+
+Workflow triggers
+
+Template integration
+
+Analytics
+
+Creative density index
+
+CTA positioning frequency
+
+Headline hierarchy analysis
+
+Design consistency scoring
+
+Messaging taxonomy extraction
+
+Strategic Outcome
+
+By Month 24, AdLayer AI becomes:
+
+The “GitHub for creatives”
+
+A structured creative database
+
+A reverse-engineering engine for marketing
+
+A bridge between design and automation
+
+A foundational infrastructure layer for creative AI systems
