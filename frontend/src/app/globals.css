@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply text-ink bg-white;
+  }
+
+  h1 {
+    @apply text-display font-bold tracking-tight text-ink;
+  }
+  h2 {
+    @apply text-heading font-semibold tracking-tight text-ink;
+  }
+  h3 {
+    @apply text-subheading font-semibold text-ink;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+}
+
+@layer utilities {
+  .gradient-accent {
+    @apply bg-gradient-to-r from-accent-purple via-accent-blue to-accent-pink;
+  }
+
+  .gradient-accent-warm {
+    @apply bg-gradient-to-r from-accent-pink via-accent-orange to-accent-purple;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-purple via-accent-blue to-accent-pink;
+  }
+
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-accent-purple/30 focus:ring-offset-2;
+  }
+
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/20;
+  }
+
+  .glass-dark {
+    @apply bg-ink/70 backdrop-blur-xl border border-white/10;
+  }
+}
