@@ -20,7 +20,6 @@ import Link from "next/link";
 export default function ExportsPage() {
   const [analyses, setAnalyses] = useState<KVAnalysisResult[]>([]);
 
-  // Refresh analysis list on mount and periodically
   useEffect(() => {
     setAnalyses(getAllAnalyses());
     const interval = setInterval(() => setAnalyses(getAllAnalyses()), 2000);
@@ -37,7 +36,6 @@ export default function ExportsPage() {
   return (
     <AppLayout>
       <div className="space-y-6">
-        {/* Header */}
         <div className="flex items-start justify-between gap-4">
           <div>
             <h2 className="text-2xl font-bold text-gray-900">Exports</h2>
@@ -56,7 +54,6 @@ export default function ExportsPage() {
           )}
         </div>
 
-        {/* Empty state */}
         {analyses.length === 0 && (
           <div className="bg-white rounded-2xl border border-slate-100 shadow-soft p-12 text-center">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-slate-100 mb-4">
@@ -79,7 +76,6 @@ export default function ExportsPage() {
           </div>
         )}
 
-        {/* Analysis list */}
         {analyses.length > 0 && (
           <div className="space-y-3">
             {analyses.map((analysis) => (
@@ -87,7 +83,6 @@ export default function ExportsPage() {
                 key={analysis.imageId}
                 className="bg-white rounded-2xl border border-slate-100 shadow-soft p-4 flex items-center gap-4"
               >
-                {/* Thumbnail */}
                 <div className="shrink-0 w-16 h-16 rounded-xl bg-slate-50 overflow-hidden flex items-center justify-center">
                   {analysis.imageDataUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -100,17 +95,13 @@ export default function ExportsPage() {
                     <ImageIcon className="h-6 w-6 text-slate-300" />
                   )}
                 </div>
-
-                {/* Info */}
                 <div className="flex-1 min-w-0 space-y-1">
-                  <div className="flex items-center gap-2">
-                    <Link
-                      href={`/analysis/${analysis.imageId}`}
-                      className="text-sm font-semibold text-ink truncate hover:text-accent-purple transition-colors"
-                    >
-                      {analysis.filename}
-                    </Link>
-                  </div>
+                  <Link
+                    href={`/analysis/${analysis.imageId}`}
+                    className="text-sm font-semibold text-ink truncate hover:text-accent-purple transition-colors block"
+                  >
+                    {analysis.filename}
+                  </Link>
                   <div className="flex items-center gap-3 text-xs text-slate-400">
                     <span className="inline-flex items-center gap-1">
                       <Clock className="h-3 w-3" />
@@ -119,8 +110,6 @@ export default function ExportsPage() {
                     <span className="font-mono">{analysis.imageId}</span>
                   </div>
                 </div>
-
-                {/* Badges */}
                 <div className="hidden sm:flex items-center gap-2 shrink-0">
                   {analysis.readinessScore !== null && (
                     <div
@@ -144,8 +133,6 @@ export default function ExportsPage() {
                     </div>
                   )}
                 </div>
-
-                {/* Export button */}
                 <ExportKVSpecButton
                   imageId={analysis.imageId}
                   variant="secondary"
