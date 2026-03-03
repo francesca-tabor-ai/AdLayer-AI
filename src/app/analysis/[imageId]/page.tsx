@@ -7,6 +7,7 @@ import { AppLayout } from "@/components/layout/app-layout";
 import { KVAnalysisView } from "@/components/kv-analysis-view";
 import { Spinner } from "@/components/ui/spinner";
 import { useKVAnalysis } from "@/hooks/use-analysis";
+import { ExportKVSpecButton } from "@/components/export-kv-spec-button";
 import {
   ArrowLeft,
   ImageIcon,
@@ -36,11 +37,14 @@ export default function AnalysisPage() {
           </Link>
         </div>
 
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900">
-            KV Analysis
-          </h2>
-          <p className="text-sm text-gray-500 mt-1 font-mono">{imageId}</p>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">
+              KV Analysis
+            </h2>
+            <p className="text-sm text-gray-500 mt-1 font-mono">{imageId}</p>
+          </div>
+          {data && <ExportKVSpecButton imageId={imageId} variant="primary" />}
         </div>
 
         {/* Loading state */}
@@ -104,6 +108,13 @@ export default function AnalysisPage() {
                     <span className="text-slate-600">
                       {new Date(data.analyzedAt).toLocaleString()}
                     </span>
+                  </div>
+                  <div className="pt-1">
+                    <ExportKVSpecButton
+                      imageId={imageId}
+                      variant="secondary"
+                      className="w-full justify-center"
+                    />
                   </div>
                 </div>
               </div>

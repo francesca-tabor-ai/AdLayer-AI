@@ -2,9 +2,10 @@
 
 import { useCallback, useState, type DragEvent } from "react";
 import { useRouter } from "next/navigation";
-import { Upload, CheckCircle, Zap, AlertCircle } from "lucide-react";
+import { Upload, CheckCircle, Zap, AlertCircle, Download } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useUploadAndAnalyze } from "@/hooks/use-images";
+import { ExportKVSpecButton } from "@/components/export-kv-spec-button";
 import { Spinner } from "@/components/ui/spinner";
 import { toast } from "@/components/ui/toast";
 
@@ -104,7 +105,7 @@ export function ImageUploadArea() {
               {uploadedId}
             </p>
           </div>
-          <div className="flex gap-3 mt-2">
+          <div className="flex items-center gap-3 mt-2">
             <button
               onClick={() => router.push(`/analysis/${uploadedId}`)}
               className="inline-flex items-center gap-1.5 text-sm font-medium text-accent-purple hover:text-accent-purple/80 underline underline-offset-2 transition-colors"
@@ -112,6 +113,7 @@ export function ImageUploadArea() {
               <Zap className="h-3.5 w-3.5" />
               View Analysis
             </button>
+            <ExportKVSpecButton imageId={uploadedId} variant="secondary" />
             <button
               onClick={() => {
                 setUploadedId(null);
