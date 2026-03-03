@@ -30,23 +30,65 @@ export async function POST(request: NextRequest) {
     const base64 = Buffer.from(bytes).toString("base64");
     const mediaType = file.type;
 
-    // Try Anthropic first, then OpenAI
+    // Build ordered list of available providers
+    const providers: { name: string; fn: () => Promise<string> }[] = [];
+
     const anthropicKey = process.env.ANTHROPIC_API_KEY;
     const openaiKey = process.env.OPENAI_API_KEY;
-
-    let analysisText: string;
+    const geminiKey = process.env.GEMINI_API_KEY;
 
     if (anthropicKey) {
-      analysisText = await analyzeWithAnthropic(anthropicKey, base64, mediaType);
-    } else if (openaiKey) {
-      analysisText = await analyzeWithOpenAI(openaiKey, base64, mediaType);
-    } else {
+      providers.push({
+        name: "Anthropic",
+        fn: () => analyzeWithAnthropic(anthropicKey, base64, mediaType),
+      });
+    }
+    if (openaiKey) {
+      providers.push({
+        name: "OpenAI",
+        fn: () => analyzeWithOpenAI(openaiKey, base64, mediaType),
+      });
+    }
+    if (geminiKey) {
+      providers.push({
+        name: "Gemini",
+        fn: () => analyzeWithGemini(geminiKey, base64, mediaType),
+      });
+    }
+
+    if (providers.length === 0) {
       return NextResponse.json(
         {
           error:
-            "No AI API key configured. Set ANTHROPIC_API_KEY or OPENAI_API_KEY in your environment variables.",
+            "No AI API key configured. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or GEMINI_API_KEY in your environment variables.",
         },
         { status: 503 }
+      );
+    }
+
+    // Try each provider in order, falling back on failure
+    let analysisText: string | null = null;
+    const errors: string[] = [];
+
+    for (const provider of providers) {
+      try {
+        console.log(`Trying ${provider.name}...`);
+        analysisText = await provider.fn();
+        console.log(`${provider.name} succeeded.`);
+        break;
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : String(err);
+        console.warn(`${provider.name} failed: ${msg}`);
+        errors.push(`${provider.name}: ${msg}`);
+      }
+    }
+
+    if (!analysisText) {
+      return NextResponse.json(
+        {
+          error: `All AI providers failed.\n${errors.join("\n")}`,
+        },
+        { status: 502 }
       );
     }
 
@@ -158,4 +200,55 @@ async function analyzeWithOpenAI(
 
   const data = await res.json();
   return data.choices?.[0]?.message?.content || "";
+}
+
+// ─── Google Gemini Vision ─────────────────────────────────────────────────────
+
+async function analyzeWithGemini(
+  apiKey: string,
+  base64: string,
+  mediaType: string
+): Promise<string> {
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        systemInstruction: {
+          parts: [{ text: KV_SYSTEM_PROMPT }],
+        },
+        contents: [
+          {
+            parts: [
+              {
+                inlineData: {
+                  mimeType: mediaType,
+                  data: base64,
+                },
+              },
+              {
+                text: "Analyze this advertisement image. Provide the full 10-section production analysis.",
+              },
+            ],
+          },
+        ],
+        generationConfig: {
+          maxOutputTokens: 8192,
+        },
+      }),
+    }
+  );
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Gemini API error (${res.status}): ${err}`);
+  }
+
+  const data = await res.json();
+  return (
+    data.candidates?.[0]?.content?.parts
+      ?.map((p: { text?: string }) => p.text || "")
+      .join("\n") || ""
+  );
 }
