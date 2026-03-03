@@ -5,8 +5,13 @@ import { AppLayout } from "@/components/layout/app-layout";
 import { DashboardWidgets } from "@/components/dashboard-widgets";
 import { Button } from "@/components/ui/button";
 import { Upload, ArrowRight } from "lucide-react";
+import { DEMO_DASHBOARD_STATS } from "@/lib/mock-data";
+import { isDemoMode } from "@/stores/auth-store";
 
 export default function DashboardPage() {
+  // In demo mode, show populated stats; otherwise show zeroes until real API
+  const stats = isDemoMode() ? DEMO_DASHBOARD_STATS : undefined;
+
   return (
     <AppLayout>
       <div className="space-y-8">
@@ -25,7 +30,7 @@ export default function DashboardPage() {
           </Link>
         </div>
 
-        <DashboardWidgets />
+        <DashboardWidgets {...(stats || {})} />
 
         <div className="bg-white rounded-2xl border border-slate-100 shadow-soft p-8">
           <h3 className="text-lg font-semibold text-ink mb-3">

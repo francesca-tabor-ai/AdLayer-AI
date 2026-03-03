@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "@/lib/api-client";
+import { isDemoMode } from "@/stores/auth-store";
+import { MOCK_ANALYSIS } from "@/lib/mock-data";
 
 interface ElementData {
   id: string;
@@ -31,6 +33,11 @@ export function useAnalysis(imageId: string) {
   return useQuery({
     queryKey: ["analysis", imageId],
     queryFn: async () => {
+      if (isDemoMode()) {
+        await new Promise((r) => setTimeout(r, 400));
+        // Return mock analysis data, substituting the requested imageId
+        return { ...MOCK_ANALYSIS, image_id: imageId } as AnalysisData;
+      }
       const res = await apiClient.get<AnalysisData>(`/analysis/${imageId}`);
       return res.data;
     },

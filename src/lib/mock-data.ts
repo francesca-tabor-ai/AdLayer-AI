@@ -319,3 +319,170 @@ export const SUPPORTED_BRANDS = [
     ],
   },
 ];
+
+// ─── Demo mode: upload, analysis & dashboard mocks ───────────────────────────
+
+export const DEMO_DASHBOARD_STATS = {
+  totalImages: 7,
+  completedImages: 5,
+  pendingExports: 1,
+  totalExports: 3,
+};
+
+export interface DemoUploadedImage {
+  image_id: string;
+  filename: string;
+  status: "completed";
+  uploaded_at: string;
+}
+
+export const DEMO_UPLOADED_IMAGES: DemoUploadedImage[] = [
+  {
+    image_id: "demo-img-001",
+    filename: "veev-one-campaign-hero.jpg",
+    status: "completed",
+    uploaded_at: "2025-06-15T10:00:00Z",
+  },
+  {
+    image_id: "demo-img-002",
+    filename: "veev-now-banner-uk.png",
+    status: "completed",
+    uploaded_at: "2025-06-16T14:30:00Z",
+  },
+];
+
+export interface MockElement {
+  id: string;
+  element_type: string;
+  semantic_role: string | null;
+  value: string | null;
+  bounding_box: { x: number; y: number; width: number; height: number };
+  confidence_score: number | null;
+  z_order: number | null;
+  dominant_color: string | null;
+  edited_by_user: boolean;
+}
+
+export interface MockIABlock {
+  id: string;
+  block_type: string;
+  element_ids: string[];
+  hierarchy_score: number | null;
+}
+
+export interface MockAnalysisData {
+  image_id: string;
+  status: string;
+  elements: MockElement[];
+  information_architecture: MockIABlock[];
+}
+
+export const MOCK_ANALYSIS: MockAnalysisData = {
+  image_id: "demo-img-001",
+  status: "completed",
+  elements: [
+    {
+      id: "el-001",
+      element_type: "text",
+      semantic_role: "headline",
+      value: "Switch to VEEV ONE",
+      bounding_box: { x: 40, y: 60, width: 520, height: 80 },
+      confidence_score: 0.97,
+      z_order: 3,
+      dominant_color: "#1a1a2e",
+      edited_by_user: false,
+    },
+    {
+      id: "el-002",
+      element_type: "text",
+      semantic_role: "subheadline",
+      value: "Premium vaping, simplified",
+      bounding_box: { x: 40, y: 150, width: 400, height: 40 },
+      confidence_score: 0.94,
+      z_order: 3,
+      dominant_color: "#6b7280",
+      edited_by_user: false,
+    },
+    {
+      id: "el-003",
+      element_type: "image",
+      semantic_role: "hero_product",
+      value: null,
+      bounding_box: { x: 600, y: 20, width: 380, height: 560 },
+      confidence_score: 0.99,
+      z_order: 2,
+      dominant_color: "#e5e7eb",
+      edited_by_user: false,
+    },
+    {
+      id: "el-004",
+      element_type: "button",
+      semantic_role: "cta_primary",
+      value: "Shop Now",
+      bounding_box: { x: 40, y: 220, width: 160, height: 48 },
+      confidence_score: 0.96,
+      z_order: 4,
+      dominant_color: "#7c3aed",
+      edited_by_user: false,
+    },
+    {
+      id: "el-005",
+      element_type: "image",
+      semantic_role: "brand_logo",
+      value: null,
+      bounding_box: { x: 40, y: 10, width: 120, height: 40 },
+      confidence_score: 0.98,
+      z_order: 5,
+      dominant_color: "#1a1a2e",
+      edited_by_user: false,
+    },
+    {
+      id: "el-006",
+      element_type: "shape",
+      semantic_role: "background",
+      value: null,
+      bounding_box: { x: 0, y: 0, width: 1024, height: 600 },
+      confidence_score: 1.0,
+      z_order: 1,
+      dominant_color: "#f8fafc",
+      edited_by_user: false,
+    },
+    {
+      id: "el-007",
+      element_type: "text",
+      semantic_role: "legal_disclaimer",
+      value: "18+ only. This product contains nicotine.",
+      bounding_box: { x: 40, y: 560, width: 400, height: 20 },
+      confidence_score: 0.91,
+      z_order: 3,
+      dominant_color: "#9ca3af",
+      edited_by_user: false,
+    },
+  ],
+  information_architecture: [
+    {
+      id: "ia-001",
+      block_type: "hero_section",
+      element_ids: ["el-001", "el-002", "el-003", "el-004"],
+      hierarchy_score: 1.0,
+    },
+    {
+      id: "ia-002",
+      block_type: "branding",
+      element_ids: ["el-005"],
+      hierarchy_score: 0.9,
+    },
+    {
+      id: "ia-003",
+      block_type: "compliance",
+      element_ids: ["el-007"],
+      hierarchy_score: 0.3,
+    },
+    {
+      id: "ia-004",
+      block_type: "canvas",
+      element_ids: ["el-006"],
+      hierarchy_score: 0.1,
+    },
+  ],
+};
