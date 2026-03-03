@@ -6,6 +6,8 @@ const nextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "**.veev-vape.com" },
       { protocol: "https", hostname: "media.iqos.com" },
+      { protocol: "https", hostname: "www.bullbrand.co.uk" },
+      { protocol: "https", hostname: "**.bullbrand.co.uk" },
     ],
   },
   async rewrites() {

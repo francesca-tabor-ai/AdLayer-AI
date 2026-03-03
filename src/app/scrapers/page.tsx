@@ -95,6 +95,9 @@ export default function ScrapersPage() {
 {`# Scrape VEEV Switzerland
 python -m backend.scrapers.veev scrape --region ch_en
 
+# Scrape Bull Brand UK (VEEV collection)
+python -m backend.scrapers.veev scrape --url https://www.bullbrand.co.uk/collections/veev
+
 # Quick test (5 pages)
 python -m backend.scrapers.veev scrape --region ch_en --max-pages 5
 
