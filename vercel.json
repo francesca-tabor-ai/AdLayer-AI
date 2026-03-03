@@ -1,6 +1,3 @@
 {
-  "version": 2,
-  "framework": "nextjs",
-  "buildCommand": "cd frontend && npm install && npm run build && cd .. && cp -r frontend/.next .next",
-  "outputDirectory": ".next"
+  "version": 2
 }
