@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { AppLayout } from "@/components/layout/app-layout";
 import { ScraperJobCard } from "@/components/scraper-job-card";
+import { NewScrapeModal } from "@/components/new-scrape-modal";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { useScrapeJobs } from "@/hooks/use-scrapers";
@@ -10,6 +12,7 @@ import { Plus, Globe } from "lucide-react";
 
 export default function ScrapersPage() {
   const { data: jobs, isLoading } = useScrapeJobs();
+  const [showNewScrape, setShowNewScrape] = useState(false);
 
   return (
     <AppLayout>
@@ -21,11 +24,19 @@ export default function ScrapersPage() {
               Collect product images and metadata from brand websites
             </p>
           </div>
-          <Button disabled title="API not connected yet">
+          <Button onClick={() => setShowNewScrape(true)}>
             <Plus className="h-4 w-4 mr-2" />
             New Scrape
           </Button>
         </div>
+
+        <NewScrapeModal
+          open={showNewScrape}
+          onClose={() => setShowNewScrape(false)}
+          onJobCreated={() => {
+            // Job created — navigates to detail page automatically
+          }}
+        />
 
         {isLoading ? (
           <div className="flex items-center justify-center py-16">
